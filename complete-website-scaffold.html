@@ -1,1080 +1,788 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Website Title</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Base Styles */
-        :root {
-            --primary-bg: #f8f5f1;
-            --secondary-bg: #ffffff;
-            --primary-color: #0d1b3e;
-            --secondary-color: #3b82f6;
-            --accent-color: #10b981;
-            --text-dark: #121212;
-            --text-medium: #374151;
-            --text-light: #6b7280;
-            --white: #ffffff;
-            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.07), 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-            -webkit-text-size-adjust: 100%;
-            height: 100%;
-        }
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--primary-bg);
-            color: var(--text-dark);
-            line-height: 1.7;
-            overflow-x: hidden;
-            width: 100%;
-            min-height: 100%;
-            position: relative;
-        }
-        
-        /* Typography */
-        h1, h2, h3, h4, h5, h6 {
-            font-weight: 700;
-            line-height: 1.3;
-            margin-bottom: 1.25rem;
-            color: var(--text-dark);
-        }
-        
-        .serif-heading {
-            font-family: 'Playfair Display', serif;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-        }
-        
-        .section-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-        
-        .section-subtitle {
-            font-size: 1.125rem;
-            text-align: center;
-            max-width: 800px;
-            margin: -1.5rem auto 3rem;
-            color: var(--text-medium);
-        }
-        
-        p {
-            margin-bottom: 1.5rem;
-        }
-        
-        a {
-            text-decoration: none;
-            color: var(--secondary-color);
-        }
-        
-        a:hover {
-            color: var(--primary-color);
-        }
-        
-        /* Layout */
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .section {
-            padding: 6rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .section-dark {
-            background: linear-gradient(135deg, var(--primary-color), #1a237e);
-            color: var(--white);
-        }
-        
-        .section-dark h2, 
-        .section-dark h3, 
-        .section-dark h4 {
-            color: var(--white);
-        }
-        
-        .grid {
-            display: grid;
-            gap: 2rem;
-        }
-        
-        .grid-cols-2 {
-            grid-template-columns: repeat(2, 1fr);
-        }
-        
-        .grid-cols-3 {
-            grid-template-columns: repeat(3, 1fr);
-        }
-        
-        .grid-cols-4 {
-            grid-template-columns: repeat(4, 1fr);
-        }
-        
-        .flex {
-            display: flex;
-        }
-        
-        .items-center {
-            align-items: center;
-        }
-        
-        .justify-between {
-            justify-content: space-between;
-        }
-        
-        .justify-center {
-            justify-content: center;
-        }
-        
-        .flex-col {
-            flex-direction: column;
-        }
-        
-        .text-center {
-            text-align: center;
-        }
-        
-        .relative {
-            position: relative;
-        }
-        
-        .z-10 {
-            z-index: 10;
-        }
-        
-        /* Buttons */
-        .btn {
-            display: inline-block;
-            padding: 0.875rem 1.75rem;
-            font-weight: 600;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            font-size: 1rem;
-            text-decoration: none;
-            border: none;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .btn-lg {
-            padding: 1rem 2.25rem;
-            font-size: 1.125rem;
-        }
-        
-        .btn-primary {
-            background-color: var(--accent-color);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background-color: #0ca678;
-            color: white;
-        }
-        
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-        }
-        
-        .btn-secondary:hover {
-            background-color: rgba(13, 27, 62, 0.05);
-        }
-        
-        .btn-white {
-            background-color: var(--white);
-            color: var(--primary-color);
-        }
-        
-        .btn-white:hover {
-            background-color: #f9fafb;
-        }
-        
-        .btn-outline-white {
-            background-color: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-        
-        .btn-outline-white:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        /* Cards */
-        .card {
-            background-color: white;
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: var(--shadow);
-            height: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .feature-card {
-            border-radius: 12px;
-            overflow: hidden;
-            background-color: white;
-            box-shadow: var(--shadow);
-            height: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .feature-icon-container {
-            height: 12rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: rgba(59, 130, 246, 0.05);
-        }
-        
-        .feature-icon {
-            font-size: 3rem;
-            color: var(--secondary-color);
-        }
-        
-        .feature-content {
-            padding: 2rem;
-        }
-        
-        /* Header & Navigation */
-        .header {
-            position: sticky;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 1rem 0;
-            background-color: rgba(248, 245, 241, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: var(--shadow);
-        }
-        
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo-icon {
-            color: var(--secondary-color);
-            margin-right: 0.5rem;
-        }
-        
-        .nav-desktop {
-            display: flex;
-            gap: 2rem;
-        }
-        
-        .nav-link {
-            color: var(--text-medium);
-            font-weight: 500;
-            position: relative;
-            padding: 0.5rem 0;
-        }
-        
-        .nav-link:hover {
-            color: var(--primary-color);
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--secondary-color);
-            transition: width 0.3s;
-        }
-        
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        
-        /* Mobile Menu - CSS-only dropdown using checkbox hack */
-        .menu-toggle {
-            display: none;
-        }
-        
-        .menu-toggle-label {
-            display: none;
-            cursor: pointer;
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            padding: 0.5rem;
-        }
-        
-        #mobile-menu-toggle {
-            display: none;
-        }
-        
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 70px; /* Header height */
-            right: 0;
-            width: 100%;
-            max-width: 300px;
-            background-color: var(--white);
-            padding: 1.5rem;
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-            border-radius: 0 0 0 10px;
-            z-index: 100;
-        }
-        
-        #mobile-menu-toggle:checked ~ .mobile-menu {
-            display: block;
-        }
-        
-        .mobile-nav-links {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .mobile-nav-link {
-            color: var(--text-dark);
-            font-size: 1.125rem;
-            font-weight: 500;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid #f1f1f1;
-        }
-        
-        .mobile-nav-link:hover {
-            color: var(--secondary-color);
-        }
-        
-        /* Hero Section */
-        .hero {
-            padding: 8rem 0 6rem;
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-        
-        .hero-title {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-        
-        .hero-title span {
-            color: var(--accent-color);
-        }
-        
-        .hero-text {
-            color: var(--text-medium);
-            font-size: 1.25rem;
-            margin-bottom: 2rem;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        /* Background patterns using CSS */
-        .bg-pattern-1 {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(circle at 20% 90%, rgba(59, 130, 246, 0.1) 0%, transparent 20%),
-                              radial-gradient(circle at 80% 10%, rgba(16, 185, 129, 0.1) 0%, transparent 20%);
-            opacity: 0.8;
-            z-index: 0;
-        }
-        
-        .bg-pattern-2 {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(circle at 70% 80%, rgba(79, 70, 229, 0.1) 0%, transparent 25%),
-                              radial-gradient(circle at 30% 20%, rgba(243, 112, 75, 0.1) 0%, transparent 25%);
-            opacity: 0.8;
-            z-index: 0;
-        }
-        
-        /* Form styles */
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--text-dark);
-        }
-        
-        .form-input {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1px solid #e5e7eb;
-            border-radius: 0.5rem;
-            background-color: var(--white);
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-        
-        .form-input:focus {
-            outline: none;
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-        
-        /* Footer */
-        .footer {
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 5rem 0 2rem;
-        }
-        
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-        
-        .footer-brand h3 {
-            color: var(--white);
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .footer-text {
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 1.5rem;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 1.5rem;
-        }
-        
-        .social-link {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1.25rem;
-            transition: color 0.3s;
-        }
-        
-        .social-link:hover {
-            color: var(--secondary-color);
-        }
-        
-        .footer-links h4 {
-            color: var(--white);
-            font-size: 1.125rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .footer-links ul {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 0.75rem;
-        }
-        
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.7);
-            transition: color 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: var(--white);
-        }
-        
-        .footer-bottom {
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        
-        .footer-copyright {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.875rem;
-        }
-        
-        .footer-legal {
-            display: flex;
-            gap: 2rem;
-        }
-        
-        .footer-legal a {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.875rem;
-            transition: color 0.3s;
-        }
-        
-        .footer-legal a:hover {
-            color: var(--white);
-        }
-        
-        /* CSS-only animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
-        }
-        
-        .delay-100 {
-            animation-delay: 0.1s;
-        }
-        
-        .delay-200 {
-            animation-delay: 0.2s;
-        }
-        
-        .delay-300 {
-            animation-delay: 0.3s;
-        }
-        
-        .delay-400 {
-            animation-delay: 0.4s;
-        }
-        
-        .delay-500 {
-            animation-delay: 0.5s;
-        }
-        
-        /* Utility classes */
-        .gap-2 {
-            gap: 0.5rem;
-        }
-        
-        .gap-4 {
-            gap: 1rem;
-        }
-        
-        .gap-8 {
-            gap: 2rem;
-        }
-        
-        .mt-2 {
-            margin-top: 0.5rem;
-        }
-        
-        .mt-4 {
-            margin-top: 1rem;
-        }
-        
-        .mt-8 {
-            margin-top: 2rem;
-        }
-        
-        .mb-2 {
-            margin-bottom: 0.5rem;
-        }
-        
-        .mb-4 {
-            margin-bottom: 1rem;
-        }
-        
-        .mb-8 {
-            margin-bottom: 2rem;
-        }
-        
-        .py-2 {
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
-        }
-        
-        .py-4 {
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-        }
-        
-        .py-8 {
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-        }
-        
-        .px-2 {
-            padding-left: 0.5rem;
-            padding-right: 0.5rem;
-        }
-        
-        .px-4 {
-            padding-left: 1rem;
-            padding-right: 1rem;
-        }
-        
-        .px-8 {
-            padding-left: 2rem;
-            padding-right: 2rem;
-        }
-        
-        .img-responsive {
-            max-width: 100%;
-            height: auto;
-        }
-        
-        /* Responsive Styles */
-        @media (max-width: 1024px) {
-            .hero-title {
-                font-size: 3rem;
-            }
-            
-            .section-title {
-                font-size: 2.25rem;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            /* Layout */
-            .section {
-                padding: 4rem 0;
-            }
-            
-            .grid-cols-2,
-            .grid-cols-3,
-            .grid-cols-4 {
-                grid-template-columns: 1fr;
-            }
-            
-            /* Typography */
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            /* Navigation */
-            .nav-desktop {
-                display: none;
-            }
-            
-            .menu-toggle-label {
-                display: block;
-            }
-            
-            /* Hero Section */
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 3rem;
-            }
-            
-            .hero-buttons {
-                justify-content: center;
-            }
-            
-            /* Footer */
-            .footer-bottom {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .footer-legal {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-            
-            .footer-copyright {
-                text-align: center;
-            }
-        }
-        
-        @media (max-width: 640px) {
-            /* Button stacking on small screens */
-            .hero-buttons {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            /* Reduced padding */
-            .section {
-                padding: 3rem 0;
-            }
-            
-            .hero {
-                padding: 6rem 0 3rem;
-            }
-            
-            /* Typography */
-            .hero-title {
-                font-size: 2rem;
-            }
-            
-            .hero-text {
-                font-size: 1.125rem;
-            }
-            
-            .section-title {
-                font-size: 1.75rem;
-                margin-bottom: 2rem;
-            }
-            
-            /* Cards */
-            .card {
-                padding: 1.5rem;
-            }
-        }
-    </style>
-</head>
+import React from 'react';
+import { 
+  ChevronRight, 
+  Check, 
+  BarChart3, 
+  Bell, 
+  CheckCircle, 
+  Rocket, 
+  Tv, 
+  Brain, 
+  TrendingUp, 
+  Twitter, 
+  Youtube, 
+  Mail, 
+  Home, 
+  Info, 
+  Tag, 
+  UserPlus, 
+  Menu, 
+  Send,
+  Scale,
+} from 'lucide-react';
 
-<body>
-    <!-- Header with CSS-only mobile menu -->
-    <header class="header">
-        <div class="container header-container">
-            <a href="#" class="logo">
-                <i class="fas fa-globe logo-icon"></i>
-                <span>Your Brand</span>
-            </a>
-            
-            <nav class="nav-desktop">
-                <a href="#features" class="nav-link">Features</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#services" class="nav-link">Services</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </nav>
-            
-            <div class="header-actions">
-                <a href="#contact" class="btn btn-primary">Get Started</a>
-                
-                <!-- CSS-only mobile menu toggle -->
-                <input type="checkbox" id="mobile-menu-toggle" class="menu-toggle">
-                <label for="mobile-menu-toggle" class="menu-toggle-label">
-                    <i class="fas fa-bars"></i>
-                </label>
-                
-                <!-- Mobile Menu -->
-                <div class="mobile-menu">
-                    <nav class="mobile-nav-links">
-                        <a href="#features" class="mobile-nav-link">Features</a>
-                        <a href="#about" class="mobile-nav-link">About</a>
-                        <a href="#services" class="mobile-nav-link">Services</a>
-                        <a href="#contact" class="mobile-nav-link">Contact</a>
-                    </nav>
-                </div>
-            </div>
+const CryptoTrendAlpha = () => {
+  return (
+    <div className="bg-[#f8f5f1] text-[#1a2b2a] font-sans">
+      {/* Header */}
+      <header className="sticky top-0 bg-[#f8f5f1] shadow-md z-50">
+        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+          <div className="text-xl font-bold">
+            <span className="text-[#2ca793]">Crypto</span>Trend Alpha
+          </div>
+          
+          <nav className="hidden md:flex space-x-8">
+            <a href="#how-it-works" className="text-[#3c5655] font-medium hover:text-[#124947]">How It Works</a>
+            <a href="#performance" className="text-[#3c5655] font-medium hover:text-[#124947]">Performance</a>
+            <a href="#pricing" className="text-[#3c5655] font-medium hover:text-[#124947]">Pricing</a>
+            <a href="#faq" className="text-[#3c5655] font-medium hover:text-[#124947]">FAQ</a>
+          </nav>
+          
+          <a href="#signup" className="hidden md:inline-block bg-[#f3704b] text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-[#e05a36] transition duration-300">
+            Start Free Trial
+          </a>
+          
+          <button className="md:hidden text-[#124947] text-2xl">
+            <Menu />
+          </button>
         </div>
-    </header>
-    
-    <!-- Hero Section -->
-    <section id="hero" class="hero">
-        <div class="bg-pattern-1"></div>
-        <div class="container">
-            <div class="hero-content">
-                <div class="fade-in">
-                    <h1 class="hero-title serif-heading">
-                        Your Main Value <span>Proposition</span> Here
-                    </h1>
-                    <p class="hero-text">
-                        A brief description of what your company does and the key benefit you provide to customers. Make it clear and compelling.
-                    </p>
-                    <div class="hero-buttons">
-                        <a href="#contact" class="btn btn-primary btn-lg">
-                            Primary CTA
-                        </a>
-                        <a href="#features" class="btn btn-secondary btn-lg">
-                            Secondary CTA
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="fade-in delay-300">
-                    <img src="https://via.placeholder.com/600x400" alt="Hero image" class="img-responsive">
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Features Section -->
-    <section id="features" class="section">
-        <div class="container">
-            <h2 class="section-title serif-heading fade-in">Our Features</h2>
-            <p class="section-subtitle fade-in">Short description of what makes your product or service special</p>
-            
-            <div class="grid grid-cols-3 gap-8">
-                <div class="feature-card fade-in">
-                    <div class="feature-icon-container">
-                        <i class="fas fa-bolt feature-icon"></i>
-                    </div>
-                    <div class="feature-content">
-                        <h3 class="text-xl font-bold mb-3">Feature One</h3>
-                        <p class="text-text-medium mb-0">
-                            Description of your first feature and how it benefits the user.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="feature-card fade-in delay-100">
-                    <div class="feature-icon-container">
-                        <i class="fas fa-shield-alt feature-icon"></i>
-                    </div>
-                    <div class="feature-content">
-                        <h3 class="text-xl font-bold mb-3">Feature Two</h3>
-                        <p class="text-text-medium mb-0">
-                            Description of your second feature and how it benefits the user.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="feature-card fade-in delay-200">
-                    <div class="feature-icon-container">
-                        <i class="fas fa-rocket feature-icon"></i>
-                    </div>
-                    <div class="feature-content">
-                        <h3 class="text-xl font-bold mb-3">Feature Three</h3>
-                        <p class="text-text-medium mb-0">
-                            Description of your third feature and how it benefits the user.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- About Section -->
-    <section id="about" class="section">
-        <div class="bg-pattern-2"></div>
-        <div class="container">
-            <h2 class="section-title serif-heading fade-in">About Us</h2>
-            <p class="section-subtitle fade-in">Learn more about our company and our mission</p>
-            
-            <div class="grid grid-cols-2 gap-8 items-center">
-                <div class="fade-in">
-                    <img src="https://via.placeholder.com/600x400" alt="About us image" class="img-responsive">
-                </div>
-                
-                <div class="fade-in delay-200">
-                    <h3 class="text-2xl font-bold mb-4">Our Story</h3>
-                    <p>
-                        Share the story of your company, its mission, and values. Explain what drives you and why customers should care about your brand.
-                    </p>
-                    <p>
-                        More details about your company background and what sets you apart from competitors. Focus on authentic information that builds trust.
-                    </p>
-                    <a href="#contact" class="btn btn-primary mt-4">Learn More</a>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Services Section -->
-    <section id="services" class="section section-dark">
-        <div class="container">
-            <h2 class="section-title serif-heading fade-in">Our Services</h2>
-            <p class="section-subtitle fade-in">Explore the solutions we provide to our clients</p>
-            
-            <div class="grid grid-cols-3 gap-8">
-                <div class="card fade-in">
-                    <h3 class="text-xl font-bold mb-3">Service One</h3>
-                    <p class="text-text-medium">
-                        Detailed description of your first service offering and how it addresses customer needs.
-                    </p>
-                    <a href="#contact" class="btn btn-primary mt-4">Get Started</a>
-                </div>
-                
-                <div class="card fade-in delay-100">
-                    <h3 class="text-xl font-bold mb-3">Service Two</h3>
-                    <p class="text-text-medium">
-                        Detailed description of your second service offering and how it addresses customer needs.
-                    </p>
-                    <a href="#contact" class="btn btn-primary mt-4">Get Started</a>
-                </div>
-                
-                <div class="card fade-in delay-200">
-                    <h3 class="text-xl font-bold mb-3">Service Three</h3>
-                    <p class="text-text-medium">
-                        Detailed description of your third service offering and how it addresses customer needs.
-                    </p>
-                    <a href="#contact" class="btn btn-primary mt-4">Get Started</a>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-        <div class="bg-pattern-1"></div>
-        <div class="container">
-            <h2 class="section-title serif-heading fade-in">Contact Us</h2>
-            <p class="section-subtitle fade-in">Get in touch with our team</p>
-            
-            <div class="grid grid-cols-2 gap-8">
-                <div class="fade-in">
-                    <h3 class="text-2xl font-bold mb-4">Get In Touch</h3>
-                    <p>
-                        We'd love to hear from you. Fill out the form and our team will get back to you as soon as possible.
-                    </p>
-                    
-                    <div class="mt-8">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-map-marker-alt text-secondary-color mr-4"></i>
-                            <span>123 Street Name, City, Country</span>
-                        </div>
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-phone text-secondary-color mr-4"></i>
-                            <span>+1 (123) 456-7890</span>
-                        </div>
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-envelope text-secondary-color mr-4"></i>
-                            <span>info@yourcompany.com</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card fade-in delay-200">
-                    <form>
-                        <div class="form-group">
-                            <label for="name" class="form-label">Full Name</label>
-                            <input type="text" id="name" class="form-input" placeholder="Your name">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email" class="form-label">Email Address</label>
-                            <input type="email" id="email" class="form-input" placeholder="Your email">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="subject" class="form-label">Subject</label>
-                            <input type="text" id="subject" class="form-input" placeholder="Subject">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message" class="form-label">Message</label>
-                            <textarea id="message" class="form-input" rows="5" placeholder="Your message"></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <h3>
-                        <i class="fas fa-globe mr-2"></i>
-                        Your Brand
-                    </h3>
-                    <p class="footer-text">
-                        A brief description of your company and what it does. Keep it short and to the point.
-                    </p>
-                    <div class="social-links">
-                        <a href="#" class="social-link">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="footer-links">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-links">
-                    <h4>Resources</h4>
-                    <ul>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Documentation</a></li>
-                        <li><a href="#">Support</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </div>
+      </header>
+      
+      {/* Hero Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+              <h1 className="text-4xl md:text-5xl font-bold font-serif leading-tight mb-6">
+                Automated Crypto Trading in <span className="text-[#124947]">5 Minutes</span> Daily
+              </h1>
+              <p className="text-lg text-[#3c5655] mb-8">
+                Our proprietary algorithm delivers 40% annualized returns while saving you hours of screen time and emotional stress.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a href="#signup" className="bg-[#f3704b] text-white font-semibold px-6 py-4 rounded-lg shadow-md hover:bg-[#e05a36] transition duration-300 text-center">
+                  Start Your 14-Day Trial
+                </a>
+                <a href="#how-it-works" className="border-2 border-[#124947] text-[#124947] font-semibold px-6 py-4 rounded-lg shadow-md hover:bg-opacity-5 hover:bg-[#124947] transition duration-300 text-center">
+                  See How It Works
+                </a>
+              </div>
             </div>
             
-            <div class="footer-bottom">
-                <p class="footer-copyright">
-                    &copy; 2025 Your Company. All rights reserved.
+            <div className="relative">
+              <div className="absolute top-0 right-8 bg-[#124947] text-white font-semibold px-4 py-2 rounded-full shadow-lg z-10">
+                5 Minutes Daily
+              </div>
+              <div className="absolute -bottom-4 left-8 bg-[#f3704b] text-white font-semibold px-4 py-2 rounded-full shadow-lg z-10">
+                40% Annual Return
+              </div>
+              
+              <div className="bg-white rounded-xl shadow-lg p-6">
+                <svg width="100%" height="350" viewBox="0 0 600 350">
+                  <text x="300" y="30" textAnchor="middle" fontFamily="Poppins" fontSize="16" fontWeight="600" fill="#1a2b2a">
+                    Portfolio Growth (40% Annual Return)
+                  </text>
+                  
+                  {/* Grid Lines */}
+                  <line x1="50" y1="50" x2="550" y2="50" stroke="#e2e8f0" strokeWidth="1" />
+                  <line x1="50" y1="125" x2="550" y2="125" stroke="#e2e8f0" strokeWidth="1" />
+                  <line x1="50" y1="200" x2="550" y2="200" stroke="#e2e8f0" strokeWidth="1" />
+                  <line x1="50" y1="275" x2="550" y2="275" stroke="#e2e8f0" strokeWidth="1" />
+                  
+                  {/* Y-axis labels */}
+                  <text x="45" y="50" textAnchor="end" fontFamily="Poppins" fontSize="12" fill="#637776">₹400K</text>
+                  <text x="45" y="125" textAnchor="end" fontFamily="Poppins" fontSize="12" fill="#637776">₹300K</text>
+                  <text x="45" y="200" textAnchor="end" fontFamily="Poppins" fontSize="12" fill="#637776">₹200K</text>
+                  <text x="45" y="275" textAnchor="end" fontFamily="Poppins" fontSize="12" fill="#637776">₹100K</text>
+                  
+                  {/* X-axis labels */}
+                  <text x="80" y="295" textAnchor="middle" fontFamily="Poppins" fontSize="12" fill="#637776">Jan</text>
+                  <text x="175" y="295" textAnchor="middle" fontFamily="Poppins" fontSize="12" fill="#637776">Mar</text>
+                  <text x="270" y="295" textAnchor="middle" fontFamily="Poppins" fontSize="12" fill="#637776">May</text>
+                  <text x="365" y="295" textAnchor="middle" fontFamily="Poppins" fontSize="12" fill="#637776">Jul</text>
+                  <text x="460" y="295" textAnchor="middle" fontFamily="Poppins" fontSize="12" fill="#637776">Sep</text>
+                  <text x="555" y="295" textAnchor="middle" fontFamily="Poppins" fontSize="12" fill="#637776">Nov</text>
+                  
+                  {/* Equity Curve Line and Area */}
+                  <path 
+                    d="M80,275 C90,270 120,240 175,230 C230,220 250,225 270,215 C290,205 320,195 365,180 C410,165 430,135 460,130 C490,125 520,90 555,70" 
+                    fill="none" 
+                    stroke="#2ca793" 
+                    strokeWidth="3"
+                  />
+                  
+                  <path 
+                    d="M80,275 C90,270 120,240 175,230 C230,220 250,225 270,215 C290,205 320,195 365,180 C410,165 430,135 460,130 C490,125 520,90 555,70 L555,275 L80,275 Z" 
+                    fill="url(#gradient)" 
+                    fillOpacity="0.2" 
+                  />
+                  
+                  {/* Gradient for the area fill */}
+                  <defs>
+                    <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stopColor="#2ca793" stopOpacity="0.6" />
+                      <stop offset="100%" stopColor="#2ca793" stopOpacity="0.1" />
+                    </linearGradient>
+                  </defs>
+                  
+                  {/* Data Points */}
+                  <circle cx="80" cy="275" r="6" fill="#2ca793" />
+                  <circle cx="175" cy="230" r="6" fill="#2ca793" />
+                  <circle cx="270" cy="215" r="6" fill="#2ca793" />
+                  <circle cx="365" cy="180" r="6" fill="#2ca793" />
+                  <circle cx="460" cy="130" r="6" fill="#2ca793" />
+                  <circle cx="555" cy="70" r="6" fill="#2ca793" />
+                  
+                  {/* Labels */}
+                  <rect x="500" y="45" width="60" height="30" rx="5" fill="#124947" />
+                  <text x="530" y="65" textAnchor="middle" fontFamily="Poppins" fontSize="12" fontWeight="600" fill="white">+40%</text>
+                  
+                  <rect x="50" y="275" width="60" height="30" rx="5" fill="#f3704b" />
+                  <text x="80" y="295" textAnchor="middle" fontFamily="Poppins" fontSize="12" fontWeight="600" fill="white">Start</text>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Stats Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="bg-white rounded-xl shadow-md p-8 text-center hover:translate-y-1 transition duration-300">
+              <div className="text-4xl font-bold text-[#124947] mb-2">5 min</div>
+              <div className="text-sm text-[#637776] font-medium">Daily Time Required</div>
+            </div>
+            <div className="bg-white rounded-xl shadow-md p-8 text-center hover:translate-y-1 transition duration-300">
+              <div className="text-4xl font-bold text-[#124947] mb-2">40%</div>
+              <div className="text-sm text-[#637776] font-medium">Annual Return</div>
+            </div>
+            <div className="bg-white rounded-xl shadow-md p-8 text-center hover:translate-y-1 transition duration-300">
+              <div className="text-4xl font-bold text-[#124947] mb-2">74%</div>
+              <div className="text-sm text-[#637776] font-medium">Win Rate</div>
+            </div>
+            <div className="bg-white rounded-xl shadow-md p-8 text-center hover:translate-y-1 transition duration-300">
+              <div className="text-4xl font-bold text-[#124947] mb-2">12%</div>
+              <div className="text-sm text-[#637776] font-medium">Max Drawdown</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* How It Works Section */}
+      <section id="how-it-works" className="py-16">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold font-serif mb-4">How It Works</h2>
+            <p className="text-lg text-[#3c5655] max-w-3xl mx-auto">
+              A simple, three-step process that takes just 5 minutes of your day
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white rounded-xl shadow-md p-10 relative hover:translate-y-1 transition duration-300">
+              <div className="absolute -top-5 left-6 w-12 h-12 rounded-full bg-[#f3704b] text-white flex items-center justify-center font-bold text-xl shadow-lg">
+                1
+              </div>
+              <div className="w-16 h-16 rounded-full bg-[#12494710] flex items-center justify-center text-[#124947] text-2xl mb-6">
+                <Bell size={28} />
+              </div>
+              <h3 className="text-xl font-semibold mb-3">Receive Daily Signals</h3>
+              <p className="text-[#3c5655]">
+                Each morning, receive clear trading signals based on our proprietary algorithm that analyzes market trends across multiple timeframes.
+              </p>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-md p-10 relative hover:translate-y-1 transition duration-300">
+              <div className="absolute -top-5 left-6 w-12 h-12 rounded-full bg-[#f3704b] text-white flex items-center justify-center font-bold text-xl shadow-lg">
+                2
+              </div>
+              <div className="w-16 h-16 rounded-full bg-[#12494710] flex items-center justify-center text-[#124947] text-2xl mb-6">
+                <CheckCircle size={28} />
+              </div>
+              <h3 className="text-xl font-semibold mb-3">Review & Approve</h3>
+              <p className="text-[#3c5655]">
+                Simply review the recommended trades in your dashboard—clear buy, sell, or hold signals for each asset in your portfolio.
+              </p>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-md p-10 relative hover:translate-y-1 transition duration-300">
+              <div className="absolute -top-5 left-6 w-12 h-12 rounded-full bg-[#f3704b] text-white flex items-center justify-center font-bold text-xl shadow-lg">
+                3
+              </div>
+              <div className="w-16 h-16 rounded-full bg-[#12494710] flex items-center justify-center text-[#124947] text-2xl mb-6">
+                <Rocket size={28} />
+              </div>
+              <h3 className="text-xl font-semibold mb-3">Execute & Relax</h3>
+              <p className="text-[#3c5655]">
+                Execute the trades with one click and go about your day. Our algorithm continuously monitors the market so you don't have to.
+              </p>
+            </div>
+          </div>
+          
+          <div className="mt-12 text-center">
+            <div className="inline-block bg-white rounded-xl shadow-md py-6 px-10">
+              <h3 className="text-xl font-bold mb-2">
+                Total Trading Time: <span className="text-[#124947]">5 Minutes</span>
+              </h3>
+              <p className="text-[#3c5655] mb-0">The rest of your day is yours</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Benefits Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold font-serif mb-4">What You're No Longer Doing</h2>
+            <p className="text-lg text-[#3c5655] max-w-3xl mx-auto">
+              Focus on what matters, automate the rest
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white rounded-xl shadow-md overflow-hidden hover:translate-y-1 transition duration-300">
+              <div className="h-48 bg-[#12494705] flex items-center justify-center">
+                <Tv size={48} className="text-[#2ca793]" />
+              </div>
+              <div className="p-8">
+                <h3 className="text-xl font-semibold mb-3">No More Endless Screen Time</h3>
+                <p className="text-[#3c5655] mb-0">
+                  Say goodbye to 8+ hours of staring at charts and constantly checking price movements.
                 </p>
-                <div class="footer-legal">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Cookie Policy</a>
-                </div>
+              </div>
             </div>
+            
+            <div className="bg-white rounded-xl shadow-md overflow-hidden hover:translate-y-1 transition duration-300">
+              <div className="h-48 bg-[#12494705] flex items-center justify-center">
+                <Brain size={48} className="text-[#2ca793]" />
+              </div>
+              <div className="p-8">
+                <h3 className="text-xl font-semibold mb-3">No More Emotional Trading</h3>
+                <p className="text-[#3c5655] mb-0">
+                  Eliminate fear and greed from your trading decisions with algorithm-driven signals.
+                </p>
+              </div>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-md overflow-hidden hover:translate-y-1 transition duration-300">
+              <div className="h-48 bg-[#12494705] flex items-center justify-center">
+                <TrendingUp size={48} className="text-[#2ca793]" />
+              </div>
+              <div className="p-8">
+                <h3 className="text-xl font-semibold mb-3">No More Analysis Paralysis</h3>
+                <p className="text-[#3c5655] mb-0">
+                  Skip the confusion of conflicting indicators and complex chart patterns.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-    </footer>
-</body>
-</html>
+      </section>
+      
+      {/* Performance Section */}
+      <section id="performance" className="py-16">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold font-serif mb-4">Verified Performance</h2>
+            <p className="text-lg text-[#3c5655] max-w-3xl mx-auto">
+              Our algorithm has been backtested across multiple market cycles with consistent results.
+            </p>
+          </div>
+          
+          <div className="bg-white rounded-xl shadow-md p-8 mb-8">
+            <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
+              <h3 className="text-xl font-semibold mb-0">Performance History</h3>
+              <div className="flex gap-1">
+                <button className="px-4 py-2 rounded-md text-sm border text-[#3c5655] hover:bg-gray-100">1M</button>
+                <button className="px-4 py-2 rounded-md text-sm border text-[#3c5655] hover:bg-gray-100">3M</button>
+                <button className="px-4 py-2 rounded-md text-sm bg-[#124947] text-white">1Y</button>
+                <button className="px-4 py-2 rounded-md text-sm border text-[#3c5655] hover:bg-gray-100">All</button>
+              </div>
+            </div>
+            <div className="bg-gray-100 w-full h-64 rounded-lg flex items-center justify-center">
+              <BarChart3 size={64} className="text-gray-400" />
+            </div>
+            <p className="text-xs text-[#637776] italic mt-4 mb-0">
+              Past performance is not indicative of future results. Chart shows backtested performance.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-white rounded-xl shadow-md p-6 text-center">
+              <div className="text-sm font-medium text-[#3c5655] mb-1">Best Month</div>
+              <div className="text-3xl font-bold text-[#f3704b] mb-1">+14.0%</div>
+              <div className="text-sm text-[#637776]">February 2024</div>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-md p-6 text-center">
+              <div className="text-sm font-medium text-[#3c5655] mb-1">Average Monthly</div>
+              <div className="text-3xl font-bold text-[#124947] mb-1">+3.3%</div>
+              <div className="text-sm text-[#637776]">Across all market conditions</div>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-md p-6 text-center">
+              <div className="text-sm font-medium text-[#3c5655] mb-1">Recovery Time</div>
+              <div className="text-3xl font-bold text-[#2ca793] mb-1">2.4 Months</div>
+              <div className="text-sm text-[#637776]">Average time to new equity high</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Pricing Section */}
+      <section id="pricing" className="py-16 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold font-serif mb-4">Performance-Based Pricing</h2>
+            <p className="text-lg text-[#3c5655] max-w-3xl mx-auto">
+              We only succeed when you succeed
+            </p>
+          </div>
+          
+          <div className="max-w-3xl mx-auto">
+            <div className="bg-white rounded-xl shadow-md overflow-hidden">
+              <div className="text-center border-b border-gray-100 p-8">
+                <h3 className="text-2xl font-bold mb-2">One Simple Plan for Everyone</h3>
+                <p className="text-[#3c5655]">Same great features for traders of all levels</p>
+              </div>
+              
+              <div className="p-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                  <div className="bg-gray-50 p-6 rounded-lg text-center">
+                    <div className="text-sm text-[#3c5655]">Monthly Subscription</div>
+                    <div className="text-3xl font-bold text-[#124947] my-1">₹1,500</div>
+                    <div className="text-xs text-[#637776]">Billed monthly</div>
+                  </div>
+                  
+                  <div className="bg-gray-50 p-6 rounded-lg text-center">
+                    <div className="text-sm text-[#3c5655]">Performance Fee</div>
+                    <div className="text-3xl font-bold text-[#124947] my-1">20%</div>
+                    <div className="text-xs text-[#637776]">of new profits only</div>
+                  </div>
+                </div>
+                
+                <div className="mb-8">
+                  <h4 className="font-semibold mb-4">What's Included:</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="flex items-start">
+                      <Check className="text-[#2ca793] mr-3 flex-shrink-0 mt-1" size={16} />
+                      <span>All major crypto pairs</span>
+                    </div>
+                    <div className="flex items-start">
+                      <Check className="text-[#2ca793] mr-3 flex-shrink-0 mt-1" size={16} />
+                      <span>Daily trade signals</span>
+                    </div>
+                    <div className="flex items-start">
+                      <Check className="text-[#2ca793] mr-3 flex-shrink-0 mt-1" size={16} />
+                      <span>Automated execution</span>
+                    </div>
+                    <div className="flex items-start">
+                      <Check className="text-[#2ca793] mr-3 flex-shrink-0 mt-1" size={16} />
+                      <span>Risk management tools</span>
+                    </div>
+                    <div className="flex items-start">
+                      <Check className="text-[#2ca793] mr-3 flex-shrink-0 mt-1" size={16} />
+                      <span>Performance dashboard</span>
+                    </div>
+                    <div className="flex items-start">
+                      <Check className="text-[#2ca793] mr-3 flex-shrink-0 mt-1" size={16} />
+                      <span>Mobile notifications</span>
+                    </div>
+                  </div>
+                  import React from 'react';
+import { 
+  ChevronRight, 
+  Check, 
+  BarChart3, 
+  Bell, 
+  CheckCircle, 
+  Rocket, 
+  Tv, 
+  Brain, 
+  TrendingUp, 
+  Twitter, 
+  Youtube, 
+  Mail, 
+  Home, 
+  Info, 
+  Tag, 
+  UserPlus, 
+  Menu, 
+  Send,
+  Scale,
+} from 'lucide-react';
+
+const CryptoTrendAlpha = () => {
+  return (
+    <div className="bg-[#f8f5f1] text-[#1a2b2a] font-sans">
+      {/* Header */}
+      <header className="sticky top-0 bg-[#f8f5f1] shadow-md z-50">
+        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+          <div className="text-xl font-bold">
+            <span className="text-[#2ca793]">Crypto</span>Trend Alpha
+          </div>
+          
+          <nav className="hidden md:flex space-x-8">
+            <a href="#how-it-works" className="text-[#3c5655] font-medium hover:text-[#124947]">How It Works</a>
+            <a href="#performance" className="text-[#3c5655] font-medium hover:text-[#124947]">Performance</a>
+            <a href="#pricing" className="text-[#3c5655] font-medium hover:text-[#124947]">Pricing</a>
+            <a href="#faq" className="text-[#3c5655] font-medium hover:text-[#124947]">FAQ</a>
+          </nav>
+          
+          <a href="#signup" className="hidden md:inline-block bg-[#f3704b] text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-[#e05a36] transition duration-300">
+            Start Free Trial
+          </a>
+          
+          <button className="md:hidden text-[#124947] text-2xl">
+            <Menu />
+          </button>
+        </div>
+      </header>
+      
+      {/* Hero Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+              <h1 className="text-4xl md:text-5xl font-bold font-serif leading-tight mb-6">
+                Automated Crypto Trading in <span className="text-[#124947]">5 Minutes</span> Daily
+              </h1>
+              <p className="text-lg text-[#3c5655] mb-8">
+                Our proprietary algorithm delivers 40% annualized returns while saving you hours of screen time and emotional stress.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a href="#signup" className="bg-[#f3704b] text-white font-semibold px-6 py-4 rounded-lg shadow-md hover:bg-[#e05a36] transition duration-300 text-center">
+                  Start Your 14-Day Trial
+                </a>
+                <a href="#how-it-works" className="border-2 border-[#124947] text-[#124947] font-semibold px-6 py-4 rounded-lg shadow-md hover:bg-opacity-5 hover:bg-[#124947] transition duration-300 text-center">
+                  See How It Works
+                </a>
+              </div>
+            </div>
+            
+            <div className="relative">
+              <div className="absolute top-0 right-8 bg-[#124947] text-white font-semibold px-4 py-2 rounded-full shadow-lg z-10">
+                5 Minutes Daily
+              </div>
+              <div className="absolute -bottom-4 left-8 bg-[#f3704b] text-white font-semibold px-4 py-2 rounded-full shadow-lg z-10">
+                40% Annual Return
+              </div>
+              
+              <div className="bg-white rounded-xl shadow-lg p-6">
+                <svg width="100%" height="350" viewBox="0 0 600 350">
+                  <text x="300" y="30" textAnchor="middle" fontFamily="Poppins" fontSize="16" fontWeight="600" fill="#1a2b2a">
+                    Portfolio Growth (40% Annual Return)
+                  </text>
+                  
+                  {/* Grid Lines */}
+                  <line x1="50" y1="50" x2="550" y2="50" stroke="#e2e8f0" strokeWidth="1" />
+                  <line x1="50" y1="125" x2="550" y2="125" stroke="#e2e8f0" strokeWidth="1" />
+                  <line x1="50" y1="200" x2="550" y2="200" stroke="#e2e8f0" strokeWidth="1" />
+                  <line x1="50" y1="275" x2="550" y2="275" stroke="#e2e8f0" strokeWidth="1" />
+                  
+                  {/* Y-axis labels */}
+                  <text x="45" y="50" textAnchor="end" fontFamily="Poppins" fontSize="12" fill="#637776">₹400K</text>
+                  <text x="45" y="125" textAnchor="end" fontFamily="Poppins" fontSize="12" fill="#637776">₹300K</text>
+                  <text x="45" y="200" textAnchor="end" fontFamily="Poppins" fontSize="12" fill="#637776">₹200K</text>
+                  <text x="45" y="275" textAnchor="end" fontFamily="Poppins" fontSize="12" fill="#637776">₹100K</text>
+                  
+                  {/* X-axis labels */}
+                  <text x="80" y="295" textAnchor="middle" fontFamily="Poppins" fontSize="12" fill="#637776">Jan</text>
+                  <text x="175" y="295" textAnchor="middle" fontFamily="Poppins" fontSize="12" fill="#637776">Mar</text>
+                  <text x="270" y="295" textAnchor="middle" fontFamily="Poppins" fontSize="12" fill="#637776">May</text>
+                  <text x="365" y="295" textAnchor="middle" fontFamily="Poppins" fontSize="12" fill="#637776">Jul</text>
+                  <text x="460" y="295" textAnchor="middle" fontFamily="Poppins" fontSize="12" fill="#637776">Sep</text>
+                  <text x="555" y="295" textAnchor="middle" fontFamily="Poppins" fontSize="12" fill="#637776">Nov</text>
+                  
+                  {/* Equity Curve Line and Area */}
+                  <path 
+                    d="M80,275 C90,270 120,240 175,230 C230,220 250,225 270,215 C290,205 320,195 365,180 C410,165 430,135 460,130 C490,125 520,90 555,70" 
+                    fill="none" 
+                    stroke="#2ca793" 
+                    strokeWidth="3"
+                  />
+                  
+                  <path 
+                    d="M80,275 C90,270 120,240 175,230 C230,220 250,225 270,215 C290,205 320,195 365,180 C410,165 430,135 460,130 C490,125 520,90 555,70 L555,275 L80,275 Z" 
+                    fill="url(#gradient)" 
+                    fillOpacity="0.2" 
+                  />
+                  
+                  {/* Gradient for the area fill */}
+                  <defs>
+                    <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stopColor="#2ca793" stopOpacity="0.6" />
+                      <stop offset="100%" stopColor="#2ca793" stopOpacity="0.1" />
+                    </linearGradient>
+                  </defs>
+                  
+                  {/* Data Points */}
+                  <circle cx="80" cy="275" r="6" fill="#2ca793" />
+                  <circle cx="175" cy="230" r="6" fill="#2ca793" />
+                  <circle cx="270" cy="215" r="6" fill="#2ca793" />
+                  <circle cx="365" cy="180" r="6" fill="#2ca793" />
+                  <circle cx="460" cy="130" r="6" fill="#2ca793" />
+                  <circle cx="555" cy="70" r="6" fill="#2ca793" />
+                  
+                  {/* Labels */}
+                  <rect x="500" y="45" width="60" height="30" rx="5" fill="#124947" />
+                  <text x="530" y="65" textAnchor="middle" fontFamily="Poppins" fontSize="12" fontWeight="600" fill="white">+40%</text>
+                  
+                  <rect x="50" y="275" width="60" height="30" rx="5" fill="#f3704b" />
+                  <text x="80" y="295" textAnchor="middle" fontFamily="Poppins" fontSize="12" fontWeight="600" fill="white">Start</text>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Stats Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="bg-white rounded-xl shadow-md p-8 text-center hover:translate-y-1 transition duration-300">
+              <div className="text-4xl font-bold text-[#124947] mb-2">5 min</div>
+              <div className="text-sm text-[#637776] font-medium">Daily Time Required</div>
+            </div>
+            <div className="bg-white rounded-xl shadow-md p-8 text-center hover:translate-y-1 transition duration-300">
+              <div className="text-4xl font-bold text-[#124947] mb-2">40%</div>
+              <div className="text-sm text-[#637776] font-medium">Annual Return</div>
+            </div>
+            <div className="bg-white rounded-xl shadow-md p-8 text-center hover:translate-y-1 transition duration-300">
+              <div className="text-4xl font-bold text-[#124947] mb-2">74%</div>
+              <div className="text-sm text-[#637776] font-medium">Win Rate</div>
+            </div>
+            <div className="bg-white rounded-xl shadow-md p-8 text-center hover:translate-y-1 transition duration-300">
+              <div className="text-4xl font-bold text-[#124947] mb-2">12%</div>
+              <div className="text-sm text-[#637776] font-medium">Max Drawdown</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* How It Works Section */}
+      <section id="how-it-works" className="py-16">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold font-serif mb-4">How It Works</h2>
+            <p className="text-lg text-[#3c5655] max-w-3xl mx-auto">
+              A simple, three-step process that takes just 5 minutes of your day
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white rounded-xl shadow-md p-10 relative hover:translate-y-1 transition duration-300">
+              <div className="absolute -top-5 left-6 w-12 h-12 rounded-full bg-[#f3704b] text-white flex items-center justify-center font-bold text-xl shadow-lg">
+                1
+              </div>
+              <div className="w-16 h-16 rounded-full bg-[#12494710] flex items-center justify-center text-[#124947] text-2xl mb-6">
+                <Bell size={28} />
+              </div>
+              <h3 className="text-xl font-semibold mb-3">Receive Daily Signals</h3>
+              <p className="text-[#3c5655]">
+                Each morning, receive clear trading signals based on our proprietary algorithm that analyzes market trends across multiple timeframes.
+              </p>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-md p-10 relative hover:translate-y-1 transition duration-300">
+              <div className="absolute -top-5 left-6 w-12 h-12 rounded-full bg-[#f3704b] text-white flex items-center justify-center font-bold text-xl shadow-lg">
+                2
+              </div>
+              <div className="w-16 h-16 rounded-full bg-[#12494710] flex items-center justify-center text-[#124947] text-2xl mb-6">
+                <CheckCircle size={28} />
+              </div>
+              <h3 className="text-xl font-semibold mb-3">Review & Approve</h3>
+              <p className="text-[#3c5655]">
+                Simply review the recommended trades in your dashboard—clear buy, sell, or hold signals for each asset in your portfolio.
+              </p>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-md p-10 relative hover:translate-y-1 transition duration-300">
+              <div className="absolute -top-5 left-6 w-12 h-12 rounded-full bg-[#f3704b] text-white flex items-center justify-center font-bold text-xl shadow-lg">
+                3
+              </div>
+              <div className="w-16 h-16 rounded-full bg-[#12494710] flex items-center justify-center text-[#124947] text-2xl mb-6">
+                <Rocket size={28} />
+              </div>
+              <h3 className="text-xl font-semibold mb-3">Execute & Relax</h3>
+              <p className="text-[#3c5655]">
+                Execute the trades with one click and go about your day. Our algorithm continuously monitors the market so you don't have to.
+              </p>
+            </div>
+          </div>
+          
+          <div className="mt-12 text-center">
+            <div className="inline-block bg-white rounded-xl shadow-md py-6 px-10">
+              <h3 className="text-xl font-bold mb-2">
+                Total Trading Time: <span className="text-[#124947]">5 Minutes</span>
+              </h3>
+              <p className="text-[#3c5655] mb-0">The rest of your day is yours</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Benefits Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold font-serif mb-4">What You're No Longer Doing</h2>
+            <p className="text-lg text-[#3c5655] max-w-3xl mx-auto">
+              Focus on what matters, automate the rest
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white rounded-xl shadow-md overflow-hidden hover:translate-y-1 transition duration-300">
+              <div className="h-48 bg-[#12494705] flex items-center justify-center">
+                <Tv size={48} className="text-[#2ca793]" />
+              </div>
+              <div className="p-8">
+                <h3 className="text-xl font-semibold mb-3">No More Endless Screen Time</h3>
+                <p className="text-[#3c5655] mb-0">
+                  Say goodbye to 8+ hours of staring at charts and constantly checking price movements.
+                </p>
+              </div>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-md overflow-hidden hover:translate-y-1 transition duration-300">
+              <div className="h-48 bg-[#12494705] flex items-center justify-center">
+                <Brain size={48} className="text-[#2ca793]" />
+              </div>
+              <div className="p-8">
+                <h3 className="text-xl font-semibold mb-3">No More Emotional Trading</h3>
+                <p className="text-[#3c5655] mb-0">
+                  Eliminate fear and greed from your trading decisions with algorithm-driven signals.
+                </p>
+              </div>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-md overflow-hidden hover:translate-y-1 transition duration-300">
+              <div className="h-48 bg-[#12494705] flex items-center justify-center">
+                <TrendingUp size={48} className="text-[#2ca793]" />
+              </div>
+              <div className="p-8">
+                <h3 className="text-xl font-semibold mb-3">No More Analysis Paralysis</h3>
+                <p className="text-[#3c5655] mb-0">
+                  Skip the confusion of conflicting indicators and complex chart patterns.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Performance Section */}
+      <section id="performance" className="py-16">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold font-serif mb-4">Verified Performance</h2>
+            <p className="text-lg text-[#3c5655] max-w-3xl mx-auto">
+              Our algorithm has been backtested across multiple market cycles with consistent results.
+            </p>
+          </div>
+          
+          <div className="bg-white rounded-xl shadow-md p-8 mb-8">
+            <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
+              <h3 className="text-xl font-semibold mb-0">Performance History</h3>
+              <div className="flex gap-1">
+                <button className="px-4 py-2 rounded-md text-sm border text-[#3c5655] hover:bg-gray-100">1M</button>
+                <button className="px-4 py-2 rounded-md text-sm border text-[#3c5655] hover:bg-gray-100">3M</button>
+                <button className="px-4 py-2 rounded-md text-sm bg-[#124947] text-white">1Y</button>
+                <button className="px-4 py-2 rounded-md text-sm border text-[#3c5655] hover:bg-gray-100">All</button>
+              </div>
+            </div>
+            <div className="bg-gray-100 w-full h-64 rounded-lg flex items-center justify-center">
+              <BarChart3 size={64} className="text-gray-400" />
+            </div>
+            <p className="text-xs text-[#637776] italic mt-4 mb-0">
+              Past performance is not indicative of future results. Chart shows backtested performance.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-white rounded-xl shadow-md p-6 text-center">
+              <div className="text-sm font-medium text-[#3c5655] mb-1">Best Month</div>
+              <div className="text-3xl font-bold text-[#f3704b] mb-1">+14.0%</div>
+              <div className="text-sm text-[#637776]">February 2024</div>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-md p-6 text-center">
+              <div className="text-sm font-medium text-[#3c5655] mb-1">Average Monthly</div>
+              <div className="text-3xl font-bold text-[#124947] mb-1">+3.3%</div>
+              <div className="text-sm text-[#637776]">Across all market conditions</div>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-md p-6 text-center">
+              <div className="text-sm font-medium text-[#3c5655] mb-1">Recovery Time</div>
+              <div className="text-3xl font-bold text-[#2ca793] mb-1">2.4 Months</div>
+              <div className="text-sm text-[#637776]">Average time to new equity high</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Pricing Section */}
+      <section id="pricing" className="py-16 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold font-serif mb-4">Performance-Based Pricing</h2>
+            <p className="text-lg text-[#3c5655] max-w-3xl mx-auto">
+              We only succeed when you succeed
+            </p>
+          </div>
+          
+          <div className="max-w-3xl mx-auto">
+            <div className="bg-white rounded-xl shadow-md overflow-hidden">
+              <div className="text-center border-b border-gray-100 p-8">
+                <h3 className="text-2xl font-bold mb-2">One Simple Plan for Everyone</h3>
+                <p className="text-[#3c5655]">Same great features for traders of all levels</p>
+              </div>
+              
+              <div className="p-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                  <div className="bg-gray-50 p-6 rounded-lg text-center">
+                    <div className="text-sm text-[#3c5655]">Monthly Subscription</div>
+                    <div className="text-3xl font-bold text-[#124947] my-1">₹1,500</div>
+                    <div className="text-xs text-[#637776]">Billed monthly</div>
+                  </div>
+                  
+                  <div className="bg-gray-50 p-6 rounded-lg text-center">
+                    <div className="text-sm text-[#3c5655]">Performance Fee</div>
+                    <div className="text-3xl font-bold text-[#124947] my-1">20%</div>
+                    <div className="text-xs text-[#637776]">of new profits only</div>
+                  </div>
+                </div>
+                
+                <div className="mb-8">
+                  <h4 className="font-semibold mb-4">What's Included:</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="flex items-start">
+                      <Check className="text-[#2ca793] mr-3 flex-shrink-0 mt-1" size={16} />
+                      <span>All major crypto pairs</span>
+                    </div>
+                    <div className="flex items-start">
+                      <Check className="text-[#2ca793] mr-3 flex-shrink-0 mt-1" size={16} />
+                      <span>Daily trade signals</span>
+                    </div>
+                    <div className="flex items-start">
+                      <Check className="text-[#2ca793] mr-3 flex-shrink-0 mt-1" size={16} />
+                      <span>Automated execution</span>
+                    </div>
+                    <div className="flex items-start">
+                      <Check className="text-[#2ca793] mr-3 flex-shrink-0 mt-1" size={16} />
+                      <span>Risk management tools</span>
+                    </div>
+                    <div className="flex items-start">
+                      <Check className="text-[#2ca793] mr-3 flex-shrink-0 mt-1" size={16} />
+                      <span>Performance dashboard</span>
+                    </div>
+                    <div className="flex items-start">
+                      <Check className="text-[#2ca793] mr-3 flex-shrink-0 mt-1" size={16} />
+                      <span>Mobile notifications</span>
+                    </div>
+                  </div>
